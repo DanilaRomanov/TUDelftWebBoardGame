@@ -1,0 +1,93 @@
+body {
+    background-color: gray;
+}
+
+.resizer {
+    position:relative;
+	width:1250px;
+	height:850px;
+    margin:auto;
+}
+
+.mainWindow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 70%;
+    width: 70%;
+
+    text-align: center;
+
+    background-image: url("https://c1.staticflickr.com/1/392/18517785458_8b2e0dc751_b.jpg");
+    background-position: 5% 50%;
+}
+
+h1 {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 40px;
+    color: rgba(0,0,0,5.6);
+    text-shadow: 0px 8px 6px rgba(0,0,0,0.2),
+                 0px -5px 35px rgba(0, 0, 0, 0);
+}
+
+#playBtn { 
+    position: fixed;
+    top: 450px;
+    right: 750px;
+
+    border: none;
+    background-color: transparent;
+    font-size: 35px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#playBtn:active {
+    color: gray;
+    transform: translateY(4px);
+}
+
+#playBtn:focus {
+    outline: 0;
+}
+
+#exitBtn {
+    position: fixed;
+    right: 751px;
+    top: 520px;
+
+    border: none;
+    background-color: transparent;
+    font-size: 35px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#exitBtn:active {
+    color: gray;
+    transform: translateY(4px);
+}
+
+#exitBtn:focus {
+    outline: 0;
+}
+
+#loader {
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+    transform: translate(0, 170px);
+    visibility: hidden;    
+}
