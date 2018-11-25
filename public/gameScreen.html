@@ -10,7 +10,7 @@
         
     </head>
 
-    <body>
+    <body onload="startGame()">
         <div class="resizer">
             <div class="mainWindow">
 
@@ -40,192 +40,194 @@
                     </tr>
 
                     <div class="boardRows">
+                         
                         <tr>
-                            <td class="rowHeader">A</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>               
+                            <td class="rowHeader">1</td>
+                                <td class="cellData" class="corner1" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" class="corner2" onclick="createIsland(this)"></td> 
+                                              
                         </tr>
                         <tr>
-                            <td class="rowHeader">B</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>   
+                            <td class="rowHeader">2</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">C</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">3</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">D</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">4</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">E</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">5</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>  
                         </tr>
                         <tr>
-                            <td class="rowHeader">F</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">6</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">G</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">7</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">H</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">8</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">I</td>
+                            <td class="rowHeader">9</td>
                                 <td class="cellData" style="border-bottom: 3px solid black"></td>
                                 <td class="cellData" style="border-bottom: 3px solid black"></td>
                                 <td class="cellData" style="border-bottom: 3px solid black"></td>
@@ -248,7 +250,7 @@
                                 <td class="cellData" style="border-bottom: 3px solid black"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">J</td>
+                            <td class="rowHeader">10</td>
                                 <td class="cellData"></td>
                                 <td class="cellData"></td>
                                 <td class="cellData"></td>
@@ -271,214 +273,221 @@
                                 <td class="cellData"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">K</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">11</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">L</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">12</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">M</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">13</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">N</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">14</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">O</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">15</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">P</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">16</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">Q</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">17</td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td> 
                         </tr>
                         <tr>
-                            <td class="rowHeader">R</td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td>
-                                <td class="cellData"></td> 
+                            <td class="rowHeader">18</td>
+                                <td class="cellData" class="corner3" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" onclick="createIsland(this)"></td>
+                                <td class="cellData" class="corner4" onclick="createIsland(this)"></td> 
                         </tr>
-
+                        
                     </div>
                 </table>
 
-                <div class="battleshipChoice">
-                    
-                    <p class="ship">Battleship<img id="battleship" alt="battleship5" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/HMS_Agincourt_main_weapon.svg" draggable="true"> </p>
-                    <p class="ship">Cruiser<img id="cruiser" alt="cruiser3"src="https://upload.wikimedia.org/wikipedia/commons/9/98/SMS_Bayern_main_weapon.svg" height="60" width="120"> </p>
-                    <p class="ship">Destroyer<img id="destroyer1" alt="destroyer2" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Nevada_class_battleship_main_weapon.svg" height="60" width="120"> </p>
-                    <p class="ship">Destroyer<img id="destroyer2" alt="destroyer2" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Nevada_class_battleship_main_weapon.svg" height="60" width="120"> </p>
-                    
-                </div>
 
+                <img id="battleship" alt="battleship5" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/HMS_Agincourt_main_weapon.svg" width="225">
+
+                <img id="cruiser" alt="cruiser3"src="https://upload.wikimedia.org/wikipedia/commons/9/98/SMS_Bayern_main_weapon.svg" width="160">
+
+                <img id="destroyer1" alt="destroyer2" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Nevada_class_battleship_main_weapon.svg" width="100">
+                
+                <img id="destroyer2" alt="destroyer2" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Nevada_class_battleship_main_weapon.svg" width="100">
+
+                
                 <div class="playersWindow">
                     <h2>Team 1</h2>
                     <h2>Team 2</h2>
+                    <p>Islands left: <span id="islandCounter">10</span></p>
+                    <input id="islandBtn" type="button" value="Island creator: OFF" onclick="enableIslandCreator()"> <br><br>
+                    <span id="cellIndexX">X-cell</span>
+                    <span id="cellIndexY">Y-cell</span> <br> <br>
+                    <span id="hitStatus">HIT: </span>
+
                 </div>
+
             </div>
 
-            
-         
         </div>
         
         <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <script src="http://code.jquery.com/ui/1.12.0/jquery-ui.js" integrity="sha256-0YPKAwZP7Mp3ALMRVB2i8GXeEndvCq3eSl/WsAl1Ryk=" crossorigin="anonymous"></script>
         <script src="gameMain.js"></script>
     </body>
 
-</html>>
+</html>
