@@ -1,7 +1,6 @@
 body {
     background-color: gray;
     font-family: 'Courier New', Courier, monospace;
-
 }
 
 .resizer {
@@ -38,7 +37,6 @@ body {
 
 table, th, td {
     border-collapse: collapse;
-    empty-cells: show;
     border: 1px solid black;
 }
 
@@ -68,28 +66,81 @@ th {
 .cellData {
     background-image: url("https://i.gifer.com/GPyH.gif");
     background-position: 5% 50%;
-    background-repeat: repeat;
     background-position: center center;
-    background-size: 200% 200%;
+    background-size: 250% 250%;
 }
+
 
 .cellData:hover {
     border: 3px solid black;
 }
 
-.ship {
-    float: left;
-    width: 20%;
-    margin-left: 4%;
-    margin-top: 20px;
-    font-size: 10;
-}
 
 #battleship {
-    height: 100px;
-    width: 90%;
+    float: left;
+    
+   
+    font-size: 10;
     cursor: move;
+
+    list-style: none;
+    margin: 4% 0% 0% 4%;
+    transform-origin: 50% 50%;
 }
+
+
+#cruiser {
+    float: left;
+
+   
+    font-size: 10;
+    cursor: move;
+
+    list-style: none;
+    margin: 4% 0% 0% 4%;
+    
+    transform-origin: 50% 50%;
+}
+
+#destroyer1 {
+    float: left;
+
+    height: 33px;
+    font-size: 10;
+    cursor: move;
+
+    list-style: none;    
+    margin: 4% 0% 0% 4%;
+    transform-origin: center center;
+}
+
+#destroyer2 {
+    float: left; 
+    
+    height: 33px;
+    font-size: 10;
+    cursor: move;
+    
+
+    list-style: none;    
+    margin: 4% 0% 0% 4%;
+    transform-origin: center center;
+}
+
+#islandCounter {
+    font-weight: 900;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
