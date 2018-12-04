@@ -30,106 +30,207 @@ body {
     top: 61px;
     
     border: 1px solid black;
-    height: 578px;
+    height: 73.75%;
     width: 30%;
 }
 
+#startBtn { 
+    margin: 5% 5% 5% 5%;
+    position: absolute;
+    transform: translate(-55%, 1100%);
 
-table, th, td {
+
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#startBtn:active {
+    color: white;
+    transform: translate(-55%, 1115%);
+    text-shadow: none;
+}
+
+#startBtn:focus {
+    outline: 0;
+}
+
+
+#team2 {
+    transform: translateY(100%);
+}
+
+
+
+
+#enemyBoard, #playerBoard, th, td {
     border-collapse: collapse;
     border: 1px solid black;
 }
 
-table {
+#enemyBoard {
     table-layout: fixed;
     width: 80%;
-    height: 80%;
+    height: 39%;
     margin-left: 83px;
-    margin-top: 20px;
+    margin-top: 22px;
+    overflow: auto;
     
     border: none;
     font-weight: 900;
 }
 
-td {
-    width: (100%/21);
+
+#playerBoard {
+    table-layout: fixed;
+    width: 80%;
+    height: 39%;
+    margin-left: 83px;
+    margin-top: 10px;
+    overflow: auto;
+    
+    border: none;
+    font-weight: 900;
 }
 
-th {
+
+th, .rowHeader {
     border: none;
 }
 
-.rowHeader {
-    border: none;
-}
 
 .cellData {
     background-image: url("https://i.gifer.com/GPyH.gif");
     background-position: 5% 50%;
     background-position: center center;
     background-size: 250% 250%;
+    width: 50%;
 }
 
+/*
+.battleship2 {
+    width: 27.75%;
+    height: 30px;
+    margin: 0% 0% 0% 0%;
 
-.cellData:hover {
-    border: 3px solid black;
+    border: 1px solid black;
+    background-color: purple;
 }
 
+.cruiser2 {
+    width: 19.75%;
+    height: 30px;
+    margin: 1.5% 0% 0% 0%;
 
-#battleship {
-    float: left;
-    
-   
-    font-size: 10;
-    cursor: move;
-
-    list-style: none;
-    margin: 4% 0% 0% 4%;
-    transform-origin: 50% 50%;
+    border: 1px solid black;
+    background-color: purple;
 }
 
+.destroyer2 {
+    width: 11.75%;
+    height: 30px;
+    margin: 1.5% 0% 0% 0%;
 
-#cruiser {
-    float: left;
-
-   
-    font-size: 10;
-    cursor: move;
-
-    list-style: none;
-    margin: 4% 0% 0% 4%;
-    
-    transform-origin: 50% 50%;
+    border: 1px solid black;
+    background-color: purple;
 }
+*/
 
-#destroyer1 {
-    float: left;
-
-    height: 33px;
-    font-size: 10;
-    cursor: move;
-
-    list-style: none;    
-    margin: 4% 0% 0% 4%;
-    transform-origin: center center;
-}
-
-#destroyer2 {
-    float: left; 
-    
-    height: 33px;
-    font-size: 10;
-    cursor: move;
-    
-
-    list-style: none;    
-    margin: 4% 0% 0% 4%;
-    transform-origin: center center;
-}
 
 #islandCounter {
     font-weight: 900;
 }
+
+#shipMenu {
+    position: relative;
+    
+    background-color: gray;
+    border: 3px solid black;
+    border-radius: 15px;
+    height: 150px;
+    width: 150px;
+    visibility: hidden;
+}
+
+#battleshipBtn {
+    margin: 12% 5% 5% 5%;
+    
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#battleshipBtn:active {
+    color: white;
+    transform: translateY(4px);
+}
+
+#battleshipBtn:focus {
+    outline: 0;
+}
+
+#cruiserBtn { 
+    margin: 5% 5% 5% 5%;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#cruiserBtn:active {
+    color: white;
+    transform: translateY(4px);
+}
+
+#cruiserBtn:focus {
+    outline: 0;
+}
+
+#destroyerBtn { 
+    margin: 5% 5% 5% 5%;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#destroyerBtn:active {
+    color: white;
+    transform: translateY(4px);
+}
+
+#destroyerBtn:focus {
+    outline: 0;
+}
+
+
+
+
+
+
+
 
 
 
