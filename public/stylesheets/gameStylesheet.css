@@ -3,6 +3,14 @@ body {
     font-family: 'Courier New', Courier, monospace;
 }
 
+h1 {
+    text-align: center;
+}
+
+#team1_Btn, #team2_Btn {
+    transform: translateX(925%);
+}
+
 .resizer {
     position:relative;
 	width:1250px;
@@ -37,7 +45,7 @@ body {
 #startBtn { 
     margin: 5% 5% 5% 5%;
     position: absolute;
-    transform: translate(-55%, 1100%);
+    transform: translate(-60%, 925%);
 
 
     border: none;
@@ -45,6 +53,7 @@ body {
     font-size: 18px;
     font-weight: 900;
     font-family: 'Courier New', Courier, monospace;
+    text-decoration: underline;
     color: black;
     text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
                  0px 8px 13px rgba(0,0,0,0.1),
@@ -53,7 +62,7 @@ body {
 
 #startBtn:active {
     color: white;
-    transform: translate(-55%, 1115%);
+    transform: translate(-60%, 950%);
     text-shadow: none;
 }
 
@@ -67,14 +76,12 @@ body {
 }
 
 
-
-
-#enemyBoard, #playerBoard, th, td {
+#team2Board, #team1Board, th, td {
     border-collapse: collapse;
     border: 1px solid black;
 }
 
-#enemyBoard {
+#team2Board {
     table-layout: fixed;
     width: 80%;
     height: 39%;
@@ -87,7 +94,7 @@ body {
 }
 
 
-#playerBoard {
+#team1Board {
     table-layout: fixed;
     width: 80%;
     height: 39%;
@@ -111,6 +118,10 @@ th, .rowHeader {
     background-position: center center;
     background-size: 250% 250%;
     width: 50%;
+}
+
+.cellData:hover {
+    box-shadow: 0 0 10px #000000 inset;
 }
 
 /*
@@ -149,11 +160,12 @@ th, .rowHeader {
 
 #shipMenu {
     position: relative;
-    
+    z-index: 1;
+
     background-color: gray;
     border: 3px solid black;
     border-radius: 15px;
-    height: 150px;
+    height: 250px;
     width: 150px;
     visibility: hidden;
 }
@@ -225,6 +237,51 @@ th, .rowHeader {
     outline: 0;
 }
 
+#rotaterBtn {
+    margin: 24% 5% 5% 5%;
+    
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#rotaterBtn:active {
+    color: white;
+    transform: translateY(4px);
+}
+
+#rotaterBtn:focus {
+    outline: 0;
+}
+
+#resetBtn {
+    margin: 5% 5% 5% 5%;
+    
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 900;
+    font-family: 'Courier New', Courier, monospace;
+    color: black;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+                 0px 8px 13px rgba(0,0,0,0.1),
+                 0px 18px 23px rgba(0,0,0,0.1);
+}
+
+#resetBtn:active {
+    color: white;
+    transform: translateY(4px);
+}
+
+#resetBtn:focus {
+    outline: 0;
+}
 
 
 
