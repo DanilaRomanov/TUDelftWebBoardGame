@@ -12,10 +12,14 @@
 
     <body>
         <div class="resizer">
-            <div class="mainWindow">
 
+             <h1>Choose a team!</h1>      
+             <input id="team1_Btn" type="button" value="Team 1" onclick="chooseTeam()">
+             <input id="team2_Btn" type="button" value="Team 2" onclick="chooseTeam()">
+
+            <div class="mainWindow">
                 
-                <table id="enemyBoard">
+                <table id="team2Board">
                         <tr class="boardColumns">
 
                         <div class="boardRows">
@@ -223,7 +227,7 @@
                         </div>
                 </table>
                 
-                <table id="playerBoard">
+                <table id="team1Board">
                    
                     <tr>
                             <td class="cellData" onclick="createIsland(this)" ondragenter="getCell(this)"></td>
@@ -431,6 +435,9 @@
                         <div class="battleship2"><input id="battleshipBtn" type="button" value="Battleship" onclick="spawnBattleship()"></div>
                         <div class="cruiser2"><input id="cruiserBtn" type="button" value="Cruiser" onclick="spawnCruiser()"></div>
                         <div class="destroyer2"><input id="destroyerBtn" type="button" value="Destroyer" onclick="spawnDestroyer()"></div>
+                        <div class="rotater"><input id="rotaterBtn" type="button" value="Rotate" onclick="rotateShip()"></div>
+                        <div class="reset"><input id="resetBtn" type="button" value="Reset" onclick="reset()"></div>
+
                 </div>
 
                 <!--
@@ -468,13 +475,14 @@
                         </div>
 
                     
-                        <p>Islands left: <span id="islandCounter">10</span></p> 
+                        <!-- <p>Islands left: <span id="islandCounter">10</span></p> 
                         <input id="islandBtn" type="button" value="Island creator: OFF" onclick="enableIslandCreator()"> <br><br>
                         <span id="shipsPlaced"></span>
                         <span id="hitStatus">HIT: </span> <br> <br>
-                                <br> <br>
-                        <span id="cellIndexX">X</span>
-                        <span id="cellIndexY">Y</span>
+                        <br> <br> -->
+
+                        <span id="cellIndexX" style="visibility: hidden">X</span>
+                        <span id="cellIndexY" style="visibility: hidden">Y</span>
                     
 
                     <input id="startBtn" type="button" value="Click me you're ready!" onclick="startGame()">
@@ -485,7 +493,8 @@
         </div>
         
         <script src="http://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-        <script src="gameScreenV2.js"></script>
+        <script src="gameMainV3.js"></script>
+        <script src="gamePlayer.js"></script>
     </body>
 
 </html>
