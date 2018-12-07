@@ -17,9 +17,10 @@
             <div class = "mainWindow">
                 <h1>BATTLESHIPS</h1>
 
-                <a href="gameScreen.html">
-                    <button id="playBtn" onclick="loading()">play</button>
-                </a>
+                
+                <form action="/play" method="get">
+                    <button type ="submit">Play</button>
+                </form>
 
                 <input id="exitBtn" type="button" value="exit">
                 <h2 id="loader">Loading</h2>
