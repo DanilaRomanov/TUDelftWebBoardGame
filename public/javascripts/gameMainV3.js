@@ -24,8 +24,15 @@ function chooseTeam() {
     document.getElementById("team2_Btn").style.visibility = "hidden";
 }
 
-console.log(battleship1.xCell + ", " + battleship1.yCell);
+// INITIALIZE ARRAY
+function teamArray(gameID, team) {
+    this.gameID = gameID;
+    this.team = team;
 
+    for (x = 0; x < 20; x++) {
+        this[x] = new Array(9).fill(1, 0, 9);
+    }
+}
 
 
 var team2Array =       [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -72,6 +79,7 @@ function getCell(e) {
 // MENU CLICK
 var shipMenu = document.getElementById("shipMenu");
 team1Board.addEventListener("click", giveShips, false);
+team1Board.addEventListener("dblclick",rotate,false);
 var showShipMenu = false;
 
 function giveShips(e) {
@@ -91,25 +99,82 @@ function giveShips(e) {
     }
 }
 
+
+function rotate(e){
+    if (playerBoardArray[parseInt(currentCellY)][(parseInt(currentCellX)+1)] == 1 ){
+        
+    }
+
+}
+
+// SHIPS SPAWNER
 var currentAngle = 1;
 function rotateShip() {
     currentAngle = (parseInt(currentAngle) * -1);
 }
 
+var ship = function (type, rotate, size){
+    
+    this.getCell = function () {
+        return this.cell;
+    }
+    this.canRotate = function () {
+        return this.rotate;
+    }
+    this.hit = function () {
+        size--;
+    }
+    
+    this.rotateShip = function () {
+        if (this.canRotate){
+            currentAngle = (parseInt(currentAngle) * -1);
+        }
+    }
+}
 
-// SHIPS SPAWNER
+
 var battleshipPlaced = false;
 function spawnBattleship() {
 
+    /*
+    if (battleshipPlaced == false) {
+        var cont = true;
+        for (var i = 0; i<=3; i++){
+            if(typeof playerBoardArray[parseInt(currentCellY)][(parseInt(currentCellX)+i)] == "undefined" || typeof playerBoardArray[parseInt(currentCellY)][(parseInt(currentCellX)-i)] == "undefined"){
+                alert("That battleship cannot be placed there!");
+                var cont = false; //Do not place ship then
+            }
+            else if (playerBoardArray[currentCellY][(parseInt(currentCellX)+i)] == 1 || playerBoardArray[currentCellY][(parseInt(currentCellX)-i)] == 1) {
+                alert("A ship is already placed at that location!");
+                var cont = false;
+        }
+        if (cont = true){
+            //Place ship
+            var rotate = true;
+            for (var i = 0; i <= 3; i++) {
+                document.getElementById("playerBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+                document.getElementById("playerBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+                document.getElementById("playerBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)-i)].style.backgroundImage = "none";
+                document.getElementById("playerBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)-i)].style.backgroundColor = "purple";
+                playerBoardArray[currentCellY][(parseInt(currentCellX)+i)] = 1;
+                playerBoardArray[currentCellY][(parseInt(currentCellX)-i)] = 1;
+                if (typeof playerBoardArray[parseInt(currentCellY)+i][(parseInt(currentCell))] == "undefined" || typeof playerBoardArray[parseInt(currentCellY)-i][(parseInt(currentCellX))] == "undefined"){
+                    var rotate = false;
+                }
+            }
+            battleshipPlaced = true;
+            // var battleship = new ship("battleship",rotate, 7,)
+            
+        }
+        */
+    
     if (battleshipPlaced == false) {
         for (var a = -3, b = 3; a = b; a++, b--) {
             if ((typeof team1Array[parseInt(currentCellY)][(parseInt(currentCellX)+a)] == "undefined" && currentAngle == 1) || (typeof team1Array[parseInt(currentCellY)][(parseInt(currentCellX)-b)] == "undefined"  && currentAngle == 1)) {
                 alert("That battleship cannot be placed there!");
                 break;
-
-            } else if (team1Array[currentCellY][(parseInt(currentCellX)+a)] == "b1" || team1Array[currentCellY][(parseInt(currentCellX)-b)] == "b1" ||
-                       team1Array[currentCellY][(parseInt(currentCellX)+a)] == "b1" || team1Array[currentCellY][(parseInt(currentCellX)-b)] == "c1" ||
-                       team1Array[currentCellY][(parseInt(currentCellX)+a)] == "b1" || team1Array[currentCellY][(parseInt(currentCellX)-b)] == "d1") {
+                //Instead of checking for b1, check for not 0                                                                                
+            } else if (team1Array[currentCellY][(parseInt(currentCellX)+a)] != 0) {
                 // alert("A ship is already placed at that location!");
                 break;
 
@@ -118,7 +183,8 @@ function spawnBattleship() {
                 for (var i = -3; i <= 3; i++) {
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
-                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "b1";
+                    
+                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "b" + player.getPlayerNumber;
                 }
 
                 battleship1.xCell = currentCellX;
@@ -139,6 +205,7 @@ function spawnBattleship() {
                 battleshipPlaced = true;
             }
         } 
+        
     } else {
         alert("This battleship has already been placed!");
     }
@@ -167,7 +234,7 @@ function spawnCruiser() {
                 for (var i = -2; i <= 2; i++) {
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
-                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "b1";
+                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "c1";
                 }
 
                 cruiser1.xCell = currentCellX;
@@ -180,7 +247,7 @@ function spawnCruiser() {
                 for (var i = -2; i <= 2; i++) {
                     document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
                     document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
-                    team1Array[(parseInt(currentCellY)+i)][currentCellX] = "b1";
+                    team1Array[(parseInt(currentCellY)+i)][currentCellX] = "c1";
                 }
 
                 cruiser1.xCell = currentCellX;
@@ -194,6 +261,7 @@ function spawnCruiser() {
 } 
 
 var destroyerPlaced = false;
+
 function spawnDestroyer() {
     
     if (destroyerPlaced == false) {
@@ -213,7 +281,7 @@ function spawnDestroyer() {
                 for (var i = -1; i <= 1; i++) {
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
                     document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
-                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "b1";
+                    team1Array[currentCellY][(parseInt(currentCellX)+i)] = "d1";
                 }
 
                 destroyer1.xCell = currentCellX;
@@ -226,7 +294,7 @@ function spawnDestroyer() {
                 for (var i = -1; i <= 1; i++) {
                     document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
                     document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
-                    team1Array[(parseInt(currentCellY)+i)][currentCellX] = "b1";
+                    team1Array[(parseInt(currentCellY)+i)][currentCellX] = "d1";
                 }
 
                 destroyer1.xCell = currentCellX;
@@ -254,13 +322,6 @@ function reset() {
     }
 }
 
-function startGame() {
-    for (var x = 0; x < team1Array.length; x++) {
-        for (var y = 0; y < team1Array[x].length; y++) {
-            console.log(team1Array[x][y]); 
-        }
-    }
-}
 
 
 function hit(e) {
