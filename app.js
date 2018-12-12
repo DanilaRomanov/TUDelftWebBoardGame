@@ -26,5 +26,5 @@ wss.on("connection", function connection(ws){
     let con  = ws;
     con.id = connectionID++;
     let playerType = currentGame.addPlayer(con);
-    websockets[con.id] = currentGame;
+    websockets[con.id] = currentGame; 
 });

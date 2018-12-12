@@ -1,3 +1,23 @@
+//Set up function that runs when the document is loaded
+
+(function setup(){
+    var socket = new WebSocket("ws://localhost:3000");
+
+    var team1 = new teamArray();
+    var team2 = new teamArray();
+
+    var team1Array = team1.setBoard();
+    var team2Array = team2.setBoard();
+
+
+    
+    
+    
+})
+
+
+
+
 function ship(type, team, size, angle, xCell, yCell) {
     this.type = type;
     this.team = team;
@@ -29,8 +49,21 @@ function teamArray(gameID, team) {
     this.gameID = gameID;
     this.team = team;
 
-    for (x = 0; x < 20; x++) {
-        this[x] = new Array(9).fill(1, 0, 9);
+    this.setBoard = function() {
+        for (x = 0; x < 20; x++) {
+            this[x] = new Array(9).fill(1, 0, 9);
+        }
+        var board = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+
+        return board;
     }
 }
 
