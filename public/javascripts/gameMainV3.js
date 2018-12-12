@@ -3,18 +3,40 @@
 (function setup(){
     var socket = new WebSocket("ws://localhost:3000");
 
-    var team1 = new teamArray();
-    var team2 = new teamArray();
+    var team1 = new team(1);
+    var team2 = new team(2);
 
     var team1Array = team1.setBoard();
     var team2Array = team2.setBoard();
+    //Ship placement phase
+    team1.addEvent(); 
+    team2.addEvent();
+    //make game objects, probably bad code
+    var gs = new GameState(team1Array, team2Array, socket);
+
+    socket.onmessage = function (message){
+        var msg = JSON.parse(message);
+        //msg[0] has type of message such as move
+        //msg[1] has the contents of the message
+        if (msg[0]=="move"){
+
+        }
+        if (msg[0]=="playerType"){
+            gs.setPlayerType(msg[1]);
+            if(msg[1]=="A"){
+
+            }
+            if (msg[1]=="B"){
+
+            }
+        }
+    }
 
 
     
     
     
 })
-
 
 
 
@@ -25,8 +47,12 @@ function ship(type, team, size, angle, xCell, yCell) {
     this.angle = angle;
     this.xCell = xCell;
     this.yCell = yCell;
-}
 
+    this.hit = function() {
+        this.size--;
+    }
+}
+/** 
 // TEAM 1 SHIPS
 var battleship1 = new ship("battleship", 1, 7, 1, 5, 5);
 var cruiser1 = new ship("cruiser", 1, 5, 1, 5, 5);
@@ -43,17 +69,17 @@ function chooseTeam() {
     document.getElementById("team1_Btn").style.visibility = "hidden";
     document.getElementById("team2_Btn").style.visibility = "hidden";
 }
-
+*/
 // INITIALIZE ARRAY
-function teamArray(gameID, team) {
+function team(team) {
     this.gameID = gameID;
     this.team = team;
-
+    this.board = null;
+    this.myBoard = document.getElementsByTagName("table")[team-1];
+    
+    //Make the array
     this.setBoard = function() {
-        for (x = 0; x < 20; x++) {
-            this[x] = new Array(9).fill(1, 0, 9);
-        }
-        var board = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        this.board = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -63,33 +89,25 @@ function teamArray(gameID, team) {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
 
-        return board;
+        return this.board;
     }
+    //Allow ships to be placed
+    this.addEvent = function(){
+        this.htmlBoard.addEventListener("click", giveShips, false);
+    }
+    //Remove events once setup is finished
+    this.removeEvent = function(){
+        this.htmlBoard.removeEventListener();
+    }
+    //Make enemy board hittable and then
+    this.addAttacks = function(){
+        if (team==2){
+            document.getElementsByTagName("table")[0].addEventListener("click",gs.attack(),false);
+        }
+    }
+
 }
 
-
-var team2Array =       [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, "b1", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-var team1Array =       [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-
-var team1Board = document.getElementsByTagName("table")[1];
 
 var currentCellX;
 var currentCellY;
