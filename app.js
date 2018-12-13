@@ -27,4 +27,9 @@ wss.on("connection", function connection(ws){
     con.id = connectionID++;
     let playerType = currentGame.addPlayer(con);
     websockets[con.id] = currentGame; 
+    var sendPlayer = JSON.stringify(["playerType",playerType]);
+    con.send(sendPlayer);
+    ws.on("message", function incoming(message){
+         
+    })
 });

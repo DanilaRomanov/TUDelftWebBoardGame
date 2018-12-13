@@ -1,9 +1,7 @@
 var game = function(gameID){
-    this.playerA = null;
-    this.playerB = null;
-    this.playerC = null;
-    this.playerD = null;
-    //Players are then randomly assorted in to teams.
+    this.player1 = null;
+    this.player2 = null;
+    //Players are then randomly assorted in to teams. Maybe.
     this.id = gameID;
     this.gameState = "0 Joined";
 
@@ -18,35 +16,25 @@ game.prototype.abort = function(){
     this.gameState = "Aborted";
 }
 game.prototype.isFull = function(){
-    return (this.gameState == "4 Joined");
+    return (this.gameState == "2 Joined");
 }
 game.prototype.addPlayer = function(p){
-    if(this.gameState != "4 Joined" || this.gameState != "Aborted"){
+    if(this.gameState != "2 Joined" || this.gameState != "Aborted"){
         //Add player
-        if (this.playerA==null){
-            this.PlayerA = p;
+        if (this.player1==null){
+            this.Player1 = p;
             this.gameState = "1 Joined";
-            return "A";
+            return "1"; //Team 1
         }
-        else if (this.playerB == null){
-            this.playerB = p;
+        else if (this.player2 == null){
+            this.player2 = p;
             this.gameState = "2 Joined";
-            return "B";
-        }
-        else if (this.playerC == null){
-            this.playerC = p;
-            this.gameState = "3 Joined";
-            return "C";
-        }
-        else{
-            this.playerD = p;
-            this.gameState = "4 Joined";
-            return "D";
+            return "2"; //Team 2
         }
         
     }
     else{
-        alert("Something went wrong");
+        alert("Something went wrong. Game is full.");
         return null;
     }
     
