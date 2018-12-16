@@ -10,6 +10,7 @@ var app = express();
 
 var Game = require("./game");
 
+
 app.use(express.static(__dirname + "/public"));
 http.createServer(app).listen(port);
 
@@ -18,11 +19,17 @@ app.get("/play", indexRouter);
 var server = http.createServer(app);
 const wss = new websocket.Server({ server });
 
-var websockets = {};
 
-var currentGame =  new Game();
+var websockets = {};
 var connectionID = 0;
+var currentGame =  new Game(connectionID);
+
+
+
+
+
 wss.on("connection", function connection(ws){  
+    
     let con  = ws;
     con.id = connectionID++;
     let playerType = currentGame.addPlayer(con);
@@ -82,4 +89,6 @@ wss.on("connection", function connection(ws){
             
         }
     })
+    
 });
+server.listen(port);

@@ -1,4 +1,4 @@
-var game = function(gameID){
+function Game(gameID){
     this.player1 = null;
     this.player2 = null;
     //Players are then randomly assorted in to teams. Maybe.
@@ -7,20 +7,20 @@ var game = function(gameID){
     this.player1Ready = false;
     this.player2Ready = false;
 
-};
+
 
 /* 
 States 
 0,1,2,3,4 Joined, Aborted.
 */
 
-game.prototype.abort = function(){
+this.abort = function(){
     this.gameState = "Aborted";
 }
-game.prototype.isFull = function(){
+this.isFull = function(){
     return (this.gameState == "2 Joined");
 }
-game.prototype.addPlayer = function(p){
+this.addPlayer = function(p){
     if(this.gameState != "2 Joined" || this.gameState != "Aborted"){
         //Add player
         if (this.player1==null){
@@ -41,7 +41,7 @@ game.prototype.addPlayer = function(p){
     }
     
 }
-game.prototype.playerReady = function(player){
+this.playerReady = function(player){
     if(player==1){
         this.player1Ready = true;
     }
@@ -49,7 +49,9 @@ game.prototype.playerReady = function(player){
         this.player2Ready = true;
     }
 }
-
-game.prototype.bothPlayersReady = function(){
+this.bothPlayersReady = function(){
     return (player1Ready && player2Ready);
 }
+};
+
+module.exports = Game;

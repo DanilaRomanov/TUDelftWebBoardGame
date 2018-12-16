@@ -73,7 +73,7 @@ function GameState(socket){
                 if(battleship.size==0){
                     this.shipsLeft--;
                     if(this.shipsLeft==0){
-                        var newMsg = JSON.stringify(["lost",this.playerType])
+                        var newMsg = JSON.stringify(["lost",this.playerType]);
                         socket.send(newMsg);
                     }
                     var newMsg = JSON.stringify(["destroyed","battleship",x,y]);
@@ -120,13 +120,13 @@ function GameState(socket){
                     var newMsg = JSON.stringify(["hit",x,y]);
                     socket.send(newMsg);
 
-            }
-            this.playerTurn = true;
-            alert("You can make your turn now!");
+                }
+                this.playerTurn = true;
+                alert("You can make your turn now!");
 
+            }
         }
     }
-
 }
 //----------------------------------
 function ship(size) {
@@ -177,9 +177,6 @@ function team(team) {
     this.removeEvent = function(){
         this.myBoard.removeEventListener();
     }
-    //Make enemy board hittable and then
-    this.addAttacks = function(){
-        
-    }
+    
 
 }
