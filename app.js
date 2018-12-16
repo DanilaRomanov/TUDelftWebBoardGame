@@ -50,15 +50,36 @@ wss.on("connection", function connection(ws){
              
          }
          //send move to other player
-         if (msg[0]=="move"){
-             var responseMsg = JSON.stringify("newMove",msg[1],msg[2]);
+         else if (msg[0]=="move"){
+             var newMsg = JSON.stringify("newMove",msg[1],msg[2]);
              //send to the other player
              if (currentGame.player1 == con){
-                currentGame.playerB.send(responseMsg);
+                currentGame.playerB.send(newMsg);
             }
             else{
-                currentGame.playerA.send(responseMsg);
+                currentGame.playerA.send(newMsg);
             }
          }
+         else if (msg[0]=="destroyed" || msg[0]=="hit"){
+             //Forward to the other player
+             if (currentGame.player1 == con){
+                currentGame.playerB.send(message);
+            }
+            else{
+                currentGame.playerA.send(message);
+            }
+         }
+         else if(msg[0]=="lost"){
+            if (msg[1]==1){
+                var winner = 0;
+            }
+            else{
+                var winner = 1;
+            }
+            var newMsg = JSON.stringify(["winner",winner]);
+            currentGame.playerB.send(newMsg);
+            currentGame.playerA.send(newMsg);
+            
+        }
     })
 });

@@ -32,8 +32,34 @@
             gs.startGame();
         }
         else if(msg[0]=="newMove"){
-            gs.update(msg[1],msg[2]);
+            gs.update(msg[2],msg[1]);
         }
+        //Receive response on if the attack was hit or not
+        else if(msg[0]=="destroyed"){
+            playerTeam.board[msg[2],msg[1]] == "x";
+            $(cell).css('background-image', 'none');
+            $(cell).css('background-color', 'red');
+            $("#battleshipTeam1").css("text-decoration", "line-through");
+            alert("An enemy ship has been destroyed");
+            this.playerTurn = true;
+        }
+        else if(msg[0]=="hit"){
+            playerTeam.board[msg[2],msg[1]] == "x";
+            $(cell).css('background-image', 'none');
+            $(cell).css('background-color', 'red');
+            this.playerTurn = true;
+        }
+        else if(msg[0]=="miss"){
+            //array is (y)(x)
+            playerTeam.board[msg[2],msg[1]] == "o";
+            $(cell).css('background-image', 'none');
+            $(cell).css('background-color', 'gray');
+            this.playerTurn = true;
+        }
+        else if(msg[0]=="winner"){
+            alert(msg[1]);
+        }
+        
     }
 })
 
@@ -282,7 +308,7 @@ function spawnDestroyer() {
         for (var i = -1; i <= 1; i++) {
             document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
             document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
-            playerArray[currentCellY][(parseInt(currentCellX)+i)] = "c1";
+            playerArray[currentCellY][(parseInt(currentCellX)+i)] = "d1";
         }
         destroyerPlaced = true;
         gs.shipsPlaced++;
@@ -291,7 +317,7 @@ function spawnDestroyer() {
         for (var i = -1; i <= 1; i++) {
             document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
             document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
-            playerArray[(parseInt(currentCellY)+i)][currentCellX] = "c1";
+            playerArray[(parseInt(currentCellY)+i)][currentCellX] = "d1";
         }
         destroyerPlaced=true;
         gs.shipsPlaced++;
