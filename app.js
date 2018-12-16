@@ -10,7 +10,6 @@ var app = express();
 
 var Game = require("./game");
 
-
 app.use(express.static(__dirname + "/public"));
 http.createServer(app).listen(port);
 
@@ -88,7 +87,8 @@ wss.on("connection", function connection(ws){
             currentGame.playerA.send(newMsg);
             
         }
-    })
+    });
     
 });
-server.listen(port);
+
+

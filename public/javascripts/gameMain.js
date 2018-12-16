@@ -2,7 +2,7 @@
 
 (function setup(){
     var socket = new WebSocket("ws://localhost:3000");
-
+    alert("let's go");
     //make game objects, probably bad code
     var gs = new GameState(socket);
 
@@ -61,7 +61,7 @@
         }
         
     }
-})
+});
 
 
 
