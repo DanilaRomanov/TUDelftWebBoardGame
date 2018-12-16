@@ -13,6 +13,7 @@ var Game = require("./game");
 app.use(express.static(__dirname + "/public"));
 http.createServer(app).listen(port);
 
+app.get("/", indexRouter);
 app.get("/play", indexRouter);
 
 var server = http.createServer(app);

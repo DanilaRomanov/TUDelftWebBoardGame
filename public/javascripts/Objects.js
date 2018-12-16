@@ -1,7 +1,7 @@
 function GameState(socket){
     this.playerType = null;
     this.prepReady = false;
-    this.shipsPlaced = 0;w
+    this.shipsPlaced = 0;
     this.shipsLeft = 3;
     this.playerTurn = false;
     
