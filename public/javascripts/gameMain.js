@@ -3,10 +3,11 @@
 (function setup(){
     var socket = new WebSocket("ws://localhost:3000");
     alert("let's go");
-    //make game objects, probably bad code
+    
     var gs = new GameState(socket);
 
     socket.onmessage = function (message){
+        alert("message received");
         var msg = JSON.parse(message);
         console.log(msg);
         //msg[0] has type of message such as move
@@ -60,6 +61,16 @@
             alert(msg[1]);
         }
         
+    }
+    socket.onopen = function(){
+        socket.send({});
+        alert("open");
+    }
+    socket.onclose = function(){
+        alert("close");
+    }
+    socket.onerror = function(){  
+        alert("socket error");
     }
 })();
 
