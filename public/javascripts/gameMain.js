@@ -1,225 +1,322 @@
-var express = require("express");
-var http = require("http");
-var websocket = require("ws");
+//Set up function that runs when the document is loaded
 
-var port = process.argv[2];
+(function setup(){
+    var socket = new WebSocket("ws://localhost:3000");
 
-var server = http.createServer(app);
-const wss = new websocket.Server({ server });
+    //make game objects, probably bad code
+    var gs = new GameState(socket);
 
+    socket.onmessage = function (message){
+        var msg = JSON.parse(message);
+        console.log(msg);
+        //msg[0] has type of message such as move
+        //msg[1] has the contents of the message
+        if (msg[0]=="move"){
 
-
-
-var gameBoard = document.getElementById("board");
-var rows = 20;
-var columns = 18;
-
-for (x = 0; x < rows; x++) {
-    for (y = 0; y < columns; y++) {
-        var tile = document.createElement("div");
-        gameBoard.appendChild(tile);
-
-        tile.id = "T(" + x + ", " + y + ")";
+        }
+        else if (msg[0]=="playerType"){
+            gs.setPlayerType(msg[1]);
+            if(msg[1]=="1"){
+                var playerTeam = new team(1);
+                var playerArray = playerTeam.getBoard();
+                playerTeam.addEvent();
+            }
+            if (msg[1]=="2"){
+                var playerTeam = new team(2);
+                var playerArray = playerTeam.getBoard();
+                playerTeam.addEvent();
+                
+            }
+        }
+        else if(msg[0]=="ready"){
+            gs.startGame();
+        }
+        else if(msg[0]=="newMove"){
+            gs.update(msg[1],msg[2]);
+        }
     }
-}
-
-function ship(tileSize, position) {
-    this.tileSize = tileSize;
-    this.position = tile;
-}
-
-function startGame() {
-    battleship = new ship(7, T(1, 18));
-    battleship.style.innerHTML = "hello";
-
-    cruiser = new ship(5, T(2, 17));
-    destroyer1 = new ship(3, T(3, 16));
-    destroyer2 = new ship(3, T(3, 15));
-}
+})
 
 
 
-// JQuery ---------------------
+//Functions and not objects
+function readyUp() {
 
-$(document).ready(function() {
-    $("#battleship").draggable( {containment: "#board", snap: ".cellData"} );
-});
-
-$(document).ready(function() {
-    $("#cruiser").draggable( {containment: "#board", snap: ".cellData"} );
-});
-
-$(document).ready(function() {
-    $("#destroyer1").draggable( {containment: "#board", snap: ".cellData"} );
-});
-
-$(document).ready(function() {
-    $("#destroyer2").draggable( {containment: "#board", snap: ".cellData"} );
-});
-
-
-
-
-var angle1 = 0;
-var angle2 = 0;
-var angle1 = 0;
-
-/*
-
-$('#battleship').on('dblclick', function() {
-    angle1 += 90;
-    $('#battleship').css('transform','rotate(' + angle1 + 'deg)');
-
-    if (((angle1 / 90) % 2) == 1) {
-        $("#battleship").css('margin', '4% -23% 23% 4%');
-        angle1 = 90;
-    } else {
-        $("#battleship").css('margin', '4% 0% 0% 4%');
-        angle1 = 0;
+    if (gs.shipsPlaced != 3) {
+        alert("You have not placed all of your ships yet!");
     }
-});
-
-$('#cruiser').on('dblclick', function() {
-    angle2 += 90;
-    $('#cruiser').css('transform','rotate(' + angle2 + 'deg)');
-    
-    if (((angle2 / 90) % 2) == 1) {
-        $("#cruiser").css('margin', '4% -16% 15% 4%');
-        angle2 = 90;
-    } else {
-        $("#cruiser").css('margin', '4% 0% 0% 4%');
-        angle2 = 0;
-    }
-});
-
-$('#destroyer1').on('dblclick', function() {
-    var angle = 0;
-    angle += 90;
-    $('#destroyer1').css('transform','rotate(' + angle + 'deg)');
-
-    if (((angle / 90) % 2) == 1) {
-        $("#cruiser").css('margin', '4% -4% 0% 0%');
-    } else {
-        $("#cruiser").css('margin', '4% 0% 4% 4%');
-    }
-});
-
-$('#destroyer2').on('dblclick', function() {
-    angle += 90;
-    $('#destroyer2').css('transform','rotate(' + angle + 'deg)');
-
-    if (((angle / 90) % 2) == 1) {
-        $("#cruiser").css('margin', '4% -4% 0% 0%');
-    } else {
-        $("#cruiser").css('margin', '4% 0% 4% 4%');
-    }  
-});
-
-*/
-
-var check = false;
-
-function enableIslandCreator() {
-    if (check == false) {
-        check = true;
-        document.getElementById("islandBtn").value = "Island Creator: ON";
-    } else {
-        check = false;
-        document.getElementById("islandBtn").value = "Island Creator: OFF";
-    }
-}
-
-var islandCount = 10;
-function createIsland(cell) {
-
-    if (check == true) {
-        var islandCounter = document.getElementById("islandCounter");
+    else{
+        //Needs something to tell the user to wait for the other player
+        //which is then hidden in gs.startGame()
         
-        if ($(cell).css('background-image') == 'none') {
-            
-        } else if (islandCount == 0) {
-            $(".cellData").prop("onclick", null).off("click");
-        } else {
-            islandCount--; 
-            $(cell).css('background-image', 'none');
-            $(cell).css('background-color', 'green');
-            islandCounter.innerHTML = islandCount;
-        }  
-    }
+        document.getElementById("startBtn").style.visibility = "hidden";
+        document.getElementById("shipMenu").style.visibility = "hidden";
+
+        team1Board.removeEventListener("click", getCell, false);
+        team1Board.removeEventListener("click", giveShips, false);
+        gs.readyUp();
         
+    } 
+
 }
 
-var gameBoardArray =   [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                        [0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]]
-
-
-// ======== Copied code from https://jsbin.com/isedel/2/edit?html,js =========
-var tbl = document.getElementsByTagName("table")[0];
-
-function getCellIndex (e) {
+var currentCellX;
+var currentCellY;
+function getCell(e) {
     var cell = e.target || window.event.srcElement;
     if ( cell.cellIndex >= 0 )
-        return cell.cellIndex + " " + cell.parentNode.rowIndex;
+        document.getElementById("cellIndexX").innerHTML = cell.cellIndex;
+        document.getElementById("cellIndexY").innerHTML = cell.parentNode.rowIndex;
+        currentCellX = cell.cellIndex;
+        currentCellY = cell.parentNode.rowIndex;
+        return currentCellY + " " + currentCellX;
     }
-  
-    if ( tbl.addEventListener ) {
-        tbl.addEventListener("click", getCellIndex, false);
-    } else if ( tbl.attachEvent ) {
-        tbl.attachEvent("onclick", getCellIndex);
+
+    if (team1Board.addEventListener) {
+        team1Board.addEventListener("click", getCell, false);
+    } else if (team1Board.attachEvent) {
+        team1Board.attachEvent("onclick", getCell);
     }
-// ===========================================================================
+
+// MENU CLICK
+var shipMenu = document.getElementById("shipMenu");
+team1Board.addEventListener("click", giveShips, false);
+var showShipMenu = false;
+
+function giveShips(e) {
+    if (showShipMenu == false) {
+        var x = e.clientX;
+        var y = e.clientY;
+       
+        shipMenu.style.transform = "translateY(-190%)"
+        shipMenu.style.left = (x - 10) + "px";   
+        shipMenu.style.visibility = "visible";
+        showShipMenu = true;
+        
+    } else if (showShipMenu == true) {
+
+        shipMenu.style.visibility = "hidden";
+        showShipMenu = false;
+    }
+}
 
 
-var cellIndex = 0;
-function hit(e) {
+battleshipPlaced = false;
+function validBattleship() {
+    var errorCheck = false;
+    if (battleshipPlaced == false) {
+        for (var a = -3; a <=3; a++) {
 
+            if (currentAngle == 1) {
+                if (typeof playerArray[parseInt(currentCellY)][(parseInt(currentCellX)+a)] == "undefined" && currentAngle == 1) {
+                    alert("That battleship cannot be placed there!");
+                    errorCheck = true;
+                    break;
     
+                } else if (playerArray[currentCellY][(parseInt(currentCellX)+a)] != 0) {
+                    alert("That battleship cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+                
+            } else if (currentAngle == -1) {
+                if (typeof playerArray[(parseInt(currentCellY)+a)][currentCellX] == "undefined" && currentAngle == 1) {
+                    alert("That battleship cannot be placed there!");
+                    errorCheck = true;
+                    break;
+    
+                } else if (playerArray[(parseInt(currentCellY)+a)][currentCellX] != 0) {
+                    alert("That battleship cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+            }
+            
 
-    var cellIndex = getCellIndex(e);
-    var parts = cellIndex.split(" ");
-    var cell = e.target || window.event.srcElement;
+            
+            
+        }
 
-    x = parts[0];
-    y = parts[1];
+        if (errorCheck == false) {
+            spawnBattleship();
+        }
 
-    if (gameBoardArray[y][x] == 1) {
-        document.getElementById("hitStatus").innerHTML = "HIT: YES";
-        $(cell).css('background-image', 'none');
-        $(cell).css('background-color', 'red');
     } else {
-        document.getElementById("hitStatus").innerHTML = "HIT: NO";
-        $(cell).css('background-image', 'none');
-        $(cell).css('background-color', 'gray');
+        alert("This battleship has already been placed!");
     }
 }
 
-if ( tbl.addEventListener ) {
-    tbl.addEventListener("click", hit, false);
-} else if ( tbl.attachEvent ) {
-    tbl.attachEvent("onclick", hit);
+function spawnBattleship() {
+    if (currentAngle == 1){
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerArray[currentCellY][(parseInt(currentCellX)+i)] = "b1";
+        }
+        battleshipPlaced = true;
+        gs.shipsPlaced++;
+    }
+    else{
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerArray[(parseInt(currentCellY)+i)][currentCellX] = "b1";
+        }
+        battleshipPlaced=true;
+        gs.shipsPlaced++;
+    } 
+}
+var cruiserPlaced = false;
+function validCruiser() {
+    var errorCheck = false;
+    if (cruiserPlaced == false) {
+        for (var a = -2; a <=2; a++) {
+
+            if (currentAngle == 1) {
+                if (typeof playerArray[parseInt(currentCellY)][(parseInt(currentCellX)+a)] == "undefined" && currentAngle == 1) {
+                    alert("That cruiser cannot be placed there!");
+                    errorCheck = true;
+                    break;
+    
+                } else if (playerArray[currentCellY][(parseInt(currentCellX)+a)] != 0) {
+                    alert("That cruiser cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+                
+            } else if (currentAngle == -1) {
+                if (typeof playerArray[(parseInt(currentCellY)+a)][currentCellX] == "undefined" && currentAngle == 1) {
+                    alert("That cruiser cannot be placed there!");
+                    errorCheck = true;
+                    break;
+    
+                } else if (playerArray[(parseInt(currentCellY)+a)][currentCellX] != 0) {
+                    alert("That cruiser cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+            }
+    
+            
+            
+        }
+
+        if (errorCheck == false) {
+            spawnCruiser();
+        }
+
+    } else {
+        alert("This battleship has already been placed!");
+    }
 }
 
+function spawnCruiser() {
+    if (currentAngle == 1){
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerArray[currentCellY][(parseInt(currentCellX)+i)] = "c1";
+        }
+        cruiserPlaced = true;
+        gs.shipsPlaced++;
+    }
+    else{
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerArray[(parseInt(currentCellY)+i)][currentCellX] = "c1";
+        }
+        cruiserPlaced=true;
+        gs.shipsPlaced++;
+    } 
+}
 
+// ==============================================================================================================================================================================================================================
 
+var destroyerPlaced = false;
+function validDestroyer() {
+    var errorCheck = false;
+    if (destroyerPlaced == false) {
+        for (var a = -1; a <= 1; a++) {
 
+            if (currentAngle == 1) {
+                if (typeof playerArray[parseInt(currentCellY)][(parseInt(currentCellX)+a)] == "undefined" && currentAngle == 1) {
+                    alert("That destroyer cannot be placed there!");
+                    errorCheck = true;
+                    break;
+    
+                } else if (playerArray[currentCellY][(parseInt(currentCellX)+a)] != 0) {
+                    alert("That destroyer cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+                
+            } else if (currentAngle == -1) {
+                if (typeof playerArray[(parseInt(currentCellY)+a)][currentCellX] == "undefined" && currentAngle == 1) {
+                    alert("That destroyer cannot be placed there!");
+                    errorCheck = true;
+                    break;
+    
+                } else if (playerArray[(parseInt(currentCellY)+a)][currentCellX] != 0) {
+                    alert("That destroyer cannot be placed there!");
+                    errorCheck = true;
+                    break;
+                }
+            }
+    
+            
+            
+        }
 
+        if (errorCheck == false) {
+            spawnDestroyer();
+        }
 
+    } else {
+        alert("This destroyer has already been placed!");
+    }
+}
 
+function spawnDestroyer() {
+    if (currentAngle == 1){
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerArray[currentCellY][(parseInt(currentCellX)+i)] = "c1";
+        }
+        destroyerPlaced = true;
+        gs.shipsPlaced++;
+    }
+    else{
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerArray[(parseInt(currentCellY)+i)][currentCellX] = "c1";
+        }
+        destroyerPlaced=true;
+        gs.shipsPlaced++;
+    } 
+
+}
+var currentAngle = 1;
+function rotateShip() {
+    currentAngle = (parseInt(currentAngle) * -1);
+}
+
+function reset() {
+    for (var x = 0; x < team1Array.length; x++) {
+        for (var y = 0; y < team1Array[x].length; y++) {
+            team1Array[x][y] = 0;
+
+            document.getElementById("team1Board").getElementsByTagName("tr")[x].getElementsByTagName("td")[y].style.backgroundImage = "url(https://i.gifer.com/GPyH.gif)";
+            document.getElementById("team1Board").getElementsByTagName("tr")[x].getElementsByTagName("td")[y].style.backgroundColor = "none";
+
+            battleshipPlaced = false;
+            cruiserPlaced = false;
+            destroyerPlaced = false;
+            gs.shipsPlaced = 0;
+
+        }
+    }
+}
 

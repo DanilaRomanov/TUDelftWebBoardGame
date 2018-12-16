@@ -12,7 +12,7 @@
     team1.addEvent(); 
     team2.addEvent();
     //make game objects, probably bad code
-    var gs = new GameState(team1Array, team2Array, socket);
+    var gs = new GameState(team1Array, socket);
 
     socket.onmessage = function (message){
         var msg = JSON.parse(message);
@@ -194,7 +194,7 @@ function rotateShip() {
 var battleshipPlaced = false;
 function validBattleship() {
     var errorCheck = false;
-    if (battleshipPlaced == false && errorCheck == false) {
+    if (battleshipPlaced == false) {
         for (var a = -3; a <=3; a++) {
 
             if (currentAngle == 1) {
@@ -223,7 +223,7 @@ function validBattleship() {
             }
             
 
-            errorCheck = false;
+            
             
         }
 
@@ -440,6 +440,7 @@ function reset() {
 
 var team1ShipsDestroyed = 0;
 function hit(e) {
+    /*
     if (team1ShipsDestroyed == 3) {
         team1Board.removeEventListener("click", hit, false);
         document.getElementById("winnerScreen").style.visibility = "visible";
@@ -505,6 +506,15 @@ function hit(e) {
 
         
     }
+    */
+    var cellIndex = getCell(e);
+    var parts = cellIndex.split(" ");
+    var cell = e.target || window.event.srcElement;
+    
+    x = parts[0];
+    y = parts[1];
+    var newMove = JSON.stringify([parts[0],parts[1]]);
+    
     
 }
 

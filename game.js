@@ -4,6 +4,8 @@ var game = function(gameID){
     //Players are then randomly assorted in to teams. Maybe.
     this.id = gameID;
     this.gameState = "0 Joined";
+    this.player1Ready = false;
+    this.player2Ready = false;
 
 };
 
@@ -38,4 +40,16 @@ game.prototype.addPlayer = function(p){
         return null;
     }
     
+}
+game.prototype.playerReady = function(player){
+    if(player==1){
+        this.player1Ready = true;
+    }
+    if(player==2){
+        this.player2Ready = true;
+    }
+}
+
+game.prototype.bothPlayersReady = function(){
+    return (player1Ready && player2Ready);
 }

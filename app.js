@@ -21,7 +21,7 @@ const wss = new websocket.Server({ server });
 var websockets = {};
 
 var currentGame =  new Game();
-
+var connectionID = 0;
 wss.on("connection", function connection(ws){  
     let con  = ws;
     con.id = connectionID++;
@@ -29,7 +29,36 @@ wss.on("connection", function connection(ws){
     websockets[con.id] = currentGame; 
     var sendPlayer = JSON.stringify(["playerType",playerType]);
     con.send(sendPlayer);
-    ws.on("message", function incoming(message){
-         
+    con.on("message", function incoming(message){
+         let msg = JSON.parse(message);
+         console.log(msg);
+         if (msg[0]=="ready"){
+             currentGame.playerReady(msg[1]);
+             if(currentGame.bothPlayersReady()){
+                var newMsg = JSON.stringify(["ready",true]);
+                //send message to the 2nd connected player
+                con.send(newMsg);
+                //send message to the 1st connected player
+                if (currentGame.player1 == con){
+                    currentGame.playerB.send(newMsg);
+                }
+                else{
+                    currentGame.playerA.send(newMsg);
+                }
+
+             }
+             
+         }
+         //send move to other player
+         if (msg[0]=="move"){
+             var responseMsg = JSON.stringify("newMove",msg[1],msg[2]);
+             //send to the other player
+             if (currentGame.player1 == con){
+                currentGame.playerB.send(responseMsg);
+            }
+            else{
+                currentGame.playerA.send(responseMsg);
+            }
+         }
     })
 });
