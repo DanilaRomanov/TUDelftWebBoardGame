@@ -159,11 +159,15 @@ function ship(size) {
 function team(team) {
     this.team = team;
     this.ready = null;
-    this.myBoard = document.getElementsByTagName("table")[team-1];
+    if (team == 1) {
+        this.myBoard = document.getElementsByTagName("table")[1];
+    } else if (team == 2) {
+        this.myBoard = document.getElementsByTagName("table")[0];
+    }
+
     if (team == 2){
         this.enemyBoard = document.getElementsByTagName("table")[0];
-    }
-    else{
+    } else{
         this.enemyBoard = document.getElementsByTagName("table")[1];
     }
     
