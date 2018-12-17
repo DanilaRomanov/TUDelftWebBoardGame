@@ -24,7 +24,7 @@ this.addPlayer = function(p){
     if(this.gameState != "2 Joined" || this.gameState != "Aborted"){
         //Add player
         if (this.player1==null){
-            this.Player1 = p;
+            this.player1 = p;
             this.gameState = "1 Joined";
             return "1"; //Team 1
         }
@@ -50,7 +50,7 @@ this.playerReady = function(player){
     }
 }
 this.bothPlayersReady = function(){
-    return (player1Ready && player2Ready);
+    return (this.player1Ready && this.player2Ready);
 }
 };
 

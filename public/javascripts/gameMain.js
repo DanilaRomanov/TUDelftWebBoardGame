@@ -2,68 +2,72 @@
 
 (function setup(){
     var socket = new WebSocket("ws://localhost:3000");
-    alert("let's go");
     
-    var gs = new GameState(socket);
+    
+    gs = new GameState(socket); //global variable no var
 
     socket.onmessage = function (message){
         alert("message received");
-        var msg = JSON.parse(message);
+        console.log(message);
+        var msg = JSON.parse(message.data);
         console.log(msg);
         //msg[0] has type of message such as move
         //msg[1] has the contents of the message
-        if (msg[0]=="move"){
+        if (msg.type=="move"){
 
         }
-        else if (msg[0]=="playerType"){
-            gs.setPlayerType(msg[1]);
-            if(msg[1]=="1"){
-                var playerTeam = new team(1);
-                var playerArray = playerTeam.getBoard();
+        else if (msg.type=="playerType"){
+           
+            gs.setPlayerType(msg.data[0]);
+            if(msg.data[0]=="1"){
+                
+                playerTeam = new team(1);
+                playerArray = playerTeam.getBoard();
                 playerTeam.addEvent();
             }
-            if (msg[1]=="2"){
-                var playerTeam = new team(2);
-                var playerArray = playerTeam.getBoard();
+            if (msg.data[0]=="2"){
+                playerTeam = new team(2);
+                playerArray = playerTeam.getBoard();
                 playerTeam.addEvent();
                 
             }
         }
-        else if(msg[0]=="ready"){
+        else if(msg.type=="ready"){
             gs.startGame();
         }
-        else if(msg[0]=="newMove"){
-            gs.update(msg[2],msg[1]);
+        else if(msg.type=="newMove"){
+            gs.update(msg.data[1],msg.data[0]); 
+            //switched around, because arrays are down then across
         }
         //Receive response on if the attack was hit or not
-        else if(msg[0]=="destroyed"){
-            playerTeam.board[msg[2],msg[1]] == "x";
+        else if(msg.type=="destroyed"){
+            playerTeam.board[msg.data[1],msg.data[0]] == "x";
             $(cell).css('background-image', 'none');
             $(cell).css('background-color', 'red');
             $("#battleshipTeam1").css("text-decoration", "line-through");
             alert("An enemy ship has been destroyed");
             this.playerTurn = true;
         }
-        else if(msg[0]=="hit"){
-            playerTeam.board[msg[2],msg[1]] == "x";
+        else if(msg.type=="hit"){
+            playerTeam.board[msg.data[1],msg.data[0]] == "x";
             $(cell).css('background-image', 'none');
             $(cell).css('background-color', 'red');
             this.playerTurn = true;
         }
-        else if(msg[0]=="miss"){
+        else if(msg.type=="miss"){
             //array is (y)(x)
-            playerTeam.board[msg[2],msg[1]] == "o";
+            playerTeam.board[msg.data[1],msg.data[0]] == "o";
             $(cell).css('background-image', 'none');
             $(cell).css('background-color', 'gray');
             this.playerTurn = true;
         }
-        else if(msg[0]=="winner"){
-            alert(msg[1]);
+        else if(msg.type=="winner"){
+            alert("The winner is " + msg.data[0]);
         }
         
     }
     socket.onopen = function(){
-        socket.send({});
+        
         alert("open");
     }
     socket.onclose = function(){
@@ -95,6 +99,9 @@ function readyUp() {
         
     } 
 
+}
+function move(e){
+    gs.move(e);
 }
 
 var currentCellX;
@@ -186,8 +193,8 @@ function validBattleship() {
 function spawnBattleship() {
     if (currentAngle == 1){
         for (var i = -3; i <= 3; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
             playerArray[currentCellY][(parseInt(currentCellX)+i)] = "b1";
         }
         battleshipPlaced = true;
@@ -195,8 +202,8 @@ function spawnBattleship() {
     }
     else{
         for (var i = -3; i <= 3; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
             playerArray[(parseInt(currentCellY)+i)][currentCellX] = "b1";
         }
         battleshipPlaced=true;
@@ -250,8 +257,8 @@ function validCruiser() {
 function spawnCruiser() {
     if (currentAngle == 1){
         for (var i = -2; i <= 2; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
             playerArray[currentCellY][(parseInt(currentCellX)+i)] = "c1";
         }
         cruiserPlaced = true;
@@ -259,8 +266,8 @@ function spawnCruiser() {
     }
     else{
         for (var i = -2; i <= 2; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
             playerArray[(parseInt(currentCellY)+i)][currentCellX] = "c1";
         }
         cruiserPlaced=true;
@@ -317,8 +324,8 @@ function validDestroyer() {
 function spawnDestroyer() {
     if (currentAngle == 1){
         for (var i = -1; i <= 1; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.backgroundColor = "purple";
             playerArray[currentCellY][(parseInt(currentCellX)+i)] = "d1";
         }
         destroyerPlaced = true;
@@ -326,8 +333,8 @@ function spawnDestroyer() {
     }
     else{
         for (var i = -1; i <= 1; i++) {
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
-            document.getElementById("myBoard").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
+            playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
             playerArray[(parseInt(currentCellY)+i)][currentCellX] = "d1";
         }
         destroyerPlaced=true;

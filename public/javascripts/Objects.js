@@ -7,6 +7,7 @@ function GameState(socket){
     
     
     this.setPlayerType = function(player){
+        console.log(player);
         this.playerType = player;
     }
     this.getPlayerType = function(player){
@@ -17,33 +18,39 @@ function GameState(socket){
     }
     
     this.readyUp = function(){
-        var newMsg = JSON.stringify(["ready",playerType]);
+        //var newMsg = JSON.stringify(["ready",playerType]);
+        console.log(this.playerType);
+        var newMsg = '{"type":"ready","data":{"0":'+this.playerType+'}}';
         socket.send(newMsg);
     }
     this.startGame = function(){
-        playerTeam.enemyBoard.addEventListener("click", this.move, false);
+        alert("Start phase 2");
+        if (this.playerType==1){
+            this.playerTurn = true;
+        }
+        playerTeam.enemyBoard.addEventListener("click", move, false);
         var battleship = new ship(7);
         var cruiser = new ship(5);
         var destroyer = new ship(3);
-        if (getPlayerType=="1"){
-            this.playerTurn == true;
-        }
+        
 
     }
     this.move = function(e){
         if (this.playerTurn){
+            console.log("move");
             var cellIndex = getCell(e);
             var parts = cellIndex.split(" ");
             var cell = e.target || window.event.srcElement;
     
             x = parts[0];
             y = parts[1];
-            if (board2[x][y]=="o" || board2[x][y]=="x"){
+
+            if (playerTeam.board2[x][y]=="o" || playerTeam.board2[x][y]=="x"){
                 alert("this has already been attacked!");
             }
             else{
                 this.playerTurn = false;
-                var newMove = JSON.stringify(["move", parts[0],parts[1]]);
+                var newMove = '{"type":"move","data":{"0":"'+parts[0]+'","1":"'+parts[1]+'"}}';
                 socket.send(newMove);
             }
         }
@@ -61,7 +68,8 @@ function GameState(socket){
         var board = playerBoard.giveBoard();
         if (board[x][y]==0){
             board[x][y]="o";
-            var newMsg = JSON.stringify(["miss",x,y]);
+            //var newMsg = JSON.stringify(["miss",x,y]);
+            var newMsg = '{"type":"miss","data":{"0":"'+x+'","1":"'+y+'"}}';
         }
         else if (board[x][y]=="o"){
             alert("Error, same place has been attacked");
@@ -73,14 +81,17 @@ function GameState(socket){
                 if(battleship.size==0){
                     this.shipsLeft--;
                     if(this.shipsLeft==0){
-                        var newMsg = JSON.stringify(["lost",this.playerType]);
+                        //var newMsg = JSON.stringify(["lost",this.playerType]);
+                        var newMsg = '{"type":"lost","data":{"0":'+this.playerType+' }}';
                         socket.send(newMsg);
                     }
-                    var newMsg = JSON.stringify(["destroyed","battleship",x,y]);
+                    //var newMsg = JSON.stringify(["destroyed","battleship",x,y]);
+                    var newMsg = '{"type":"destroyed","data":{"0":"battleship","1":"'+x+'","2":"'+y+'"}}';
                     socket.send(newMsg);
                 }
                 else{
-                    var newMsg = JSON.stringify(["hit",x,y]);
+                    //var newMsg = JSON.stringify(["hit",x,y]);
+                    var newMsg = '{"type":"hit","data":{"0":"'+x+'","1":"'+y+'"}}';
                     socket.send(newMsg);
                 }
             }
@@ -89,16 +100,20 @@ function GameState(socket){
                 if(cruiser.size==0){
                     this.shipsLeft--;
                     if(this.shipsLeft==0){
-                        var newMsg = JSON.stringify(["lost",this.playerType])
+                        //var newMsg = JSON.stringify(["lost",this.playerType])
+                        var newMsg = '{"type":"lost","data":{"0":'+this.playerType+' }}';
                         socket.send(newMsg);
                     }
                     else{
-                        var newMsg = JSON.stringify(["destroyed","cruiser",x,y]);
+                        //var newMsg = JSON.stringify(["destroyed","cruiser",x,y]);
+                        var newMsg = '{"type":"destroyed","data":{"0":"cruiser","1":"'+x+'","2":"'+y+'"}}';
+
                         socket.send(newMsg);
                     }
                 }
                 else{
-                    var newMsg = JSON.stringify(["hit",x,y]);
+                    //var newMsg = JSON.stringify(["hit",x,y]);
+                    var newMsg = '{"type":"hit","data":{"0":"'+x+'","1":"'+y+'"}}';
                     socket.send(newMsg);
 
                 }
@@ -108,16 +123,19 @@ function GameState(socket){
                 if(destroyer.size==0){
                     this.shipsLeft--;
                     if(this.shipsLeft==0){
-                        var newMsg = JSON.stringify(["lost",this.playerType])
+                        //var newMsg = JSON.stringify(["lost",this.playerType])
+                        var newMsg = '{"type":"lost","data":{"0":'+this.playerType+' }}';
                         socket.send(newMsg);
                     }
                     else{
-                        var newMsg = JSON.stringify(["destroyed","destroyer",x,y]);
+                        //var newMsg = JSON.stringify(["destroyed","destroyer",x,y]);
+                        var newMsg = '{"type":"destroyed","data":{"0":"destroyer","1":"'+x+'","2":"'+y+'"}}';
                         socket.send(newMsg);
                     }
                 }
                 else{
-                    var newMsg = JSON.stringify(["hit",x,y]);
+                    //var newMsg = JSON.stringify(["hit",x,y]);
+                    var newMsg = '{"type":"hit","data":{"0":"'+x+'","1":"'+y+'"}}';
                     socket.send(newMsg);
 
                 }
@@ -160,10 +178,18 @@ function team(team) {
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
     
     //Enemy board from the pov of the player
-    this.board2 = this.board;
+    this.board2 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
     
     //Make the array
-    this.giveBoard = function() {
+    this.getBoard = function() {
         return this.board;
     }
     this.setBoard = function(newBoard){
