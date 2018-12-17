@@ -1,7 +1,9 @@
-console.log("hello1");
 var express = require("express");
 var http = require("http");
 var websocket = require("ws");
+var cookieParser = require("cookie-parser");
+var cookieSession = require("cookie-session");
+var session = require("express-session");
 
 var indexRouter = require("./routes/index");
 
@@ -11,24 +13,29 @@ var app = express();
 
 var Game = require("./game");
 
-app.use(express.static(__dirname + "/public"));
+var server = http.createServer(app);
+const wss = new websocket.Server({ server });
 
+app.use(express.static(__dirname + "/public"));
 
 app.get("/", indexRouter);
 app.get("/play", indexRouter);
 
-var server = http.createServer(app);
-const wss = new websocket.Server({ server });
-
-
 var websockets = {};
 var connectionID = 0;
 var currentGame =  new Game(connectionID);
-var gamesStarted = 0;
 
+app.use(cookieParser());
 
-
-
+app.get('/splash', function(req, res){
+    if(req.session.views){
+        req.session.views++;
+        res.cookie('name', 'cookie_name').send('<p>You have visited this webpage ' + req.session.views + ' times!</p>');
+    } else {
+       req.session.views = 1;
+       res.send("Welcome to this page for the first time!");
+    }
+ });
 
 wss.on("connection", function connection(ws){  
     console.log(ws);
@@ -106,4 +113,3 @@ wss.on("connection", function connection(ws){
     
 });
 server.listen(port);
-
