@@ -432,9 +432,9 @@
                 </table>
                 
                 <div id="shipMenu">
-                        <div class="battleship2"><input id="battleshipBtn" type="button" value="Battleship" onclick="spawnBattleship()"></div>
-                        <div class="cruiser2"><input id="cruiserBtn" type="button" value="Cruiser" onclick="spawnCruiser()"></div>
-                        <div class="destroyer2"><input id="destroyerBtn" type="button" value="Destroyer" onclick="spawnDestroyer()"></div>
+                        <div class="battleship2"><input id="battleshipBtn" type="button" value="Battleship" onclick="validBattleship()"></div>
+                        <div class="cruiser2"><input id="cruiserBtn" type="button" value="Cruiser" onclick="validCruiser()"></div>
+                        <div class="destroyer2"><input id="destroyerBtn" type="button" value="Destroyer" onclick="validDestroyer()"></div>
                         <div class="rotater"><input id="rotaterBtn" type="button" value="Rotate" onclick="rotateShip()"></div>
                         <div class="reset"><input id="resetBtn" type="button" value="Reset" onclick="reset()"></div>
 
@@ -487,6 +487,8 @@
                 </div>
 
             </div>
+
+            <input id="fullscreenBtn" type="button" value="Fullscreen" onclick="fullscreen()">
 
         </div>
         
