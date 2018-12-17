@@ -16,14 +16,18 @@
         if (msg.type=="move"){
 
         }
-        else if (msg.type=="playerType"){
-           
+
+        else if (msg.type == "playerType" ){
+
             gs.setPlayerType(msg.data[0]);
+
             if(msg.data[0]=="1"){
                 
+
                 playerTeam = new team(1);
                 playerArray = playerTeam.getBoard();
                 playerTeam.addEvent();
+
             }
             if (msg.data[0]=="2"){
                 playerTeam = new team(2);
@@ -32,7 +36,9 @@
                 
             }
         }
+
         else if(msg.type=="ready"){
+
             gs.startGame();
         }
         else if(msg.type=="newMove"){
@@ -264,7 +270,7 @@ function spawnCruiser() {
         cruiserPlaced = true;
         gs.shipsPlaced++;
     }
-    else{
+    else {
         for (var i = -2; i <= 2; i++) {
             playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundImage = "none";
             playerTeam.myBoard.getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.backgroundColor = "purple";
@@ -364,3 +370,105 @@ function reset() {
     }
 }
 
+var isFullscreen = false;
+function fullscreen() {
+    var elements = document.documentElement;
+
+    if (isFullscreen == false) {
+        if (elements.requestFullscreen) {
+            elements.requestFullscreen();
+        } else if (elements.webkitRequestFullscreen) {
+            elements.webkitRequestFullscreen();
+        }
+
+        isFullscreen = true;
+        
+    } else if (isFullscreen == true) {
+        if (elements.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        }
+
+        isFullscreen = false;
+    }
+
+}
+
+
+
+//EVENT LISTENERS (MISC)
+document.getElementById("battleshipBtn").addEventListener("mouseover", function() {
+    if (currentAngle == 1) {
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    } else {
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    }
+    
+})
+
+document.getElementById("battleshipBtn").addEventListener("mouseleave", function() {
+    if (currentAngle == 1) {
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "none";
+        }
+    } else {
+        for (var i = -3; i <= 3; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "none";
+        }
+    }
+})
+
+document.getElementById("cruiserBtn").addEventListener("mouseover", function() {
+    if (currentAngle == 1) {
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    } else {
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    }
+    
+})
+
+document.getElementById("cruiserBtn").addEventListener("mouseleave", function() {
+    if (currentAngle == 1) {
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "none";
+        }
+    } else {
+        for (var i = -2; i <= 2; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "none";
+        }
+    }
+})
+
+document.getElementById("destroyerBtn").addEventListener("mouseover", function() {
+    if (currentAngle == 1) {
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    } else {
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "0 0 10px #000000 inset";
+        }
+    }
+    
+})
+
+document.getElementById("destroyerBtn").addEventListener("mouseleave", function() {
+    if (currentAngle == 1) {
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[currentCellY].getElementsByTagName("td")[(parseInt(currentCellX)+i)].style.boxShadow = "none";
+        }
+    } else {
+        for (var i = -1; i <= 1; i++) {
+            document.getElementById("team1Board").getElementsByTagName("tr")[(parseInt(currentCellY)+i)].getElementsByTagName("td")[currentCellX].style.boxShadow = "none";
+        }
+    }
+})
